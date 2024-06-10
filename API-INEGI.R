@@ -7,27 +7,13 @@ library(httr)
 library(jsonlite)
 library(rjson)
 
-# Obtener datos de API del INEGI - Por estado
-
-# Lista todos los estados
-catalogo_estados <- read.csv("catalogo-estados.csv",header = T,sep = ",", 
-                             encoding = "UTF-8", colClasses = c("character","character"))
-estados_name <- catalogo_estados$Estado[1:11] # Primeros 11 estados de la lista
-estados <- paste(catalogo_estados$Codigo[1:11], collapse = ",")
-# Indicadores y nombre de indicadores
-indicadores <- "1002000001,1002000002,1002000003,1002000010,3105001001"
-indicadores_name <- c("Pob_total", "Pob_mujeres", "Pob_hombres", "Edad_mediana","Densidad")
-# INEGI API key
-API_key <- "..."
-
-
 # Funcion INEGI API indicadores y estados variables
 
-INEGI_API <- function(indicadores, indicadores_name = NA, estados, estados_name = NA, API_key){
+INEGI_API <- function(indicadores, indicadores_name = NA, estados, estados_name = NA, API_token){
   
   #Llamado al API
   url <- paste("https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/",
-               indicadores,"/es/",estados,"/false/BISE/2.0/",API_key,"?type=json",sep = "")
+               indicadores,"/es/",estados,"/false/BISE/2.0/",API_token,"?type=json",sep = "")
   respuesta<-GET(url)
   datosGenerales<-content(respuesta,"text")
   flujoDatos<-paste(datosGenerales,collapse = " ")
@@ -53,7 +39,3 @@ INEGI_API <- function(indicadores, indicadores_name = NA, estados, estados_name 
              pivot_wider(names_from = geo,values_from = datos), envir = .GlobalEnv)
   }
 }
-
-INEGI_API(indicadores,indicadores_name,estados, estados_name, API_key)
-
-
