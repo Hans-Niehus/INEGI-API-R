@@ -6,5 +6,5 @@ Revisar archivo API-INEGI.R
 
 El repositorio contiene un ejemplo, llamando a los indicadores "Pob_total", "Pob_mujeres", "Pob_hombres", "Edad_mediana","Densidad" de los primeros 11 estados que aparecen en el archivo "catalogo-estados.csv".
 
-En la variable API_token reemplaza los tres puntos por la clave otorgada por el INEGI para hacer llamadas a su API, para obtener token en: https://www.inegi.org.mx/app/desarrolladores/generatoken/Usuarios/token_Verify
+En la variable API_token reemplaza los tres puntos por la clave otorgada por el INEGI para hacer llamadas a su API, puedes obtener tu token en: https://www.inegi.org.mx/app/desarrolladores/generatoken/Usuarios/token_Verify
 
